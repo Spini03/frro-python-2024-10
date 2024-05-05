@@ -8,57 +8,64 @@ ScreenManager:
                     rgb: [0,0.5,0]
             Label:
                 text: "Formulario"
+                size_hint_y: None
+                height: sp(50)
+                font_size: sp(30)
             
-            TextInput:
-                title: 'Input 1'
-                auto_dismiss: False
-                id: test1
-                hint_text:'Ingrese su nombre'
-                pos_hint: {'center_x': 0.5, 'center_y': 0.705}
-                size_hint: 0.95, 0.5
-            TextInput:
-                title: 'Input 2'
-                auto_dismiss: False
-                id: test1
-                hint_text:'Ingrese su apellido'
-                pos_hint: {'center_x': 0.5, 'center_y': 0.705}
-                size_hint: 0.95, 0.5
-            TextInput:
-                title: 'Input 3'
-                auto_dismiss: False
-                id: test1
-                hint_text:'Ingrese su número'
-                pos_hint: {'center_x': 0.5, 'center_y': 0.705}
-                size_hint: 0.95, 0.5
-            TextInput:
-                title: 'Input 1'
-                auto_dismiss: False
-                id: test1
-                hint_text:'Ingrese su color favorito'
-                pos_hint: {'center_x': 0.5, 'center_y': 0.705}
-                size_hint: 0.95, 0.5
-        BoxLayout:
-            size_hint_y: 0.2
-            orientation: 'horizontal'
-            padding: 20
-            pos_hint: {'center_x':0.5, 'center_y':0.09}
+            GridLayout:
+                cols: 2
+                spacing: dp(10)
+                padding: dp(10)
+                TextInput:
+                    hint_text:'Nombre'
+                    size_hint: (0.5, None)
+                    height: dp(40)
+                TextInput:
+                    hint_text:'Apellido'
+                    size_hint: (0.5, None)
+                    height: dp(40)
+                TextInput:
+                    hint_text:'Número'
+                    size_hint: (0.5, None)
+                    height: dp(40)
+                TextInput:
+                    hint_text:'Color Favorito'
+                    size_hint: (0.5, None)
+                    height: dp(40)
             Button:
                 text: "Enviar formulario"
                 on_press:
                     root.transition.direction = 'left'
                     root.current = "Pantalla 2"
-                size_hint: (0.3,0.1)
-                width: 300
-                height: 100
+                size_hint: (0.5,None)
+                width: dp(200)
+                height: dp(50)
+                pos_hint: {'center_x': 0.5}
+
         ProgressBar:
+            size_hint_y: None
+            height: dp(20)  
+            id: progress_bar
             max: 100
             value: 0
-            pos_hint: {'center_x':0.5,'center_y':0.9}
+            pos_hint: {'center_x':0.5,'center_y':0.91}
         
     Screen:
-        name: "Pantalla 2"  
+        name: "Pantalla 2"
         BoxLayout:
+            orientation: "vertical"
             ProgressBar:
+                size_hint_y: None
+                height: dp(20)
+                id: progress_bar
                 max: 100
                 value: 50
-                pos_hint: {'center_x':0.5,'center_y':0.9}
+                pos_hint: {'center_x':0.5, 'center_y':0.91}
+        
+            Button:
+                text: "Completar"
+                on_press: progress_bar.value=100
+                size_hint: (0.5,None)
+                height: dp(50)
+                width: dp(200)
+                pos_hint: {'center_x': 0.5}
