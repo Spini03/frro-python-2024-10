@@ -1,0 +1,16 @@
+<CustomPopup>:
+    title: "Ejemplo de Popup"
+    size_hint: None, None
+    size: 200, 200
+
+    Button:
+        text: "Cerrar Popup"
+        on_press: root.dismiss()
+
+<PopupExample>:
+    Button:
+        text: "Mostrar Popup"
+        size_hint: None, None
+        size: 200, 100
+        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+        on_press: app.show_popup()
