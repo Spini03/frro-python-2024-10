@@ -13,6 +13,7 @@ ScreenManager:
                 font_size: sp(30)
             
             GridLayout:
+                id: grid
                 cols: 2
                 spacing: dp(10)
                 padding: dp(10)
@@ -20,18 +21,23 @@ ScreenManager:
                     hint_text:'Nombre'
                     size_hint: (0.5, None)
                     height: dp(40)
+                    on_text: progress_bar.value += 25
+
                 TextInput:
                     hint_text:'Apellido'
                     size_hint: (0.5, None)
                     height: dp(40)
+                    on_text: progress_bar.value += 25
                 TextInput:
                     hint_text:'Número'
                     size_hint: (0.5, None)
                     height: dp(40)
+                    on_text: progress_bar.value += 25
                 TextInput:
                     hint_text:'Color Favorito'
                     size_hint: (0.5, None)
                     height: dp(40)
+                    on_text: progress_bar.value += 25
             Button:
                 text: "Enviar formulario"
                 on_press:
@@ -63,8 +69,10 @@ ScreenManager:
                 pos_hint: {'center_x':0.5, 'center_y':0.91}
         
             Button:
-                text: "Completar"
-                on_press: progress_bar.value=100
+                text: "Volver"
+                on_press: 
+                    root.transition.direction = 'right'
+                    root.current = "Formulario"
                 size_hint: (0.5,None)
                 height: dp(50)
                 width: dp(200)

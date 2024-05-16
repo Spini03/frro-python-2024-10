@@ -1,0 +1,16 @@
+<CameraBoxLayout>:
+    orientation: 'vertical'
+    
+    Button:
+        text: "Tomar foto"
+        on_press: root.capture_photo()
+        size_hint: (0.5,None)
+        width: dp(200)
+        height: dp(50)
+        pos_hint: {'center_x': 0.5}
+
+    Image:
+        id: img_preview
+        size_hint_y: 0.8
+        allow_stretch: True
+        keep_ratio: True
