@@ -3,7 +3,7 @@
 
 Contexto: Se tiene un programa que lee diferentes listas de una tabla en una
 base de datos y se quieren combinar estas listas para que luego puedan crearse
-los objetos de la capa de negocio.
+los objetos de la capa de negocio. Hola
 """
 
 # -*- coding: utf-8 -*-
