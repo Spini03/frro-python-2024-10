@@ -1,13 +1,36 @@
 """Base de Datos SQL - Alta"""
 
 import datetime
-from practico_04.ejercicio_01 import reset_tabla
+
+import pymysql
+from ejercicio_01 import reset_tabla
 
 
 def agregar_persona(nombre, nacimiento, dni, altura):
     """Implementar la funcion agregar_persona, que inserte un registro en la 
-    tabla Persona y devuelva los datos ingresados el id del nuevo registro."""
-    pass # Completar
+    tabla Persona y devuelva los datos ingresados y el id del nuevo registro."""
+    # Completar
+    conn = pymysql.connect( host="localhost", port=3306, user="root", passwd="Git231653*", db="practico4" )
+
+    cursor = conn.cursor()
+
+    values = (nombre, nacimiento, dni, altura)
+
+    cursor.execute("INSERT INTO Persona (Nombre, FechaNacimiento, DNI, Altura) VALUES (%s, %s, %s, %s)", values)
+
+    conn.commit()
+
+    nuevo_id = cursor.lastrowid
+
+    print(f"Nueva persona registrada con id {nuevo_id}")
+
+    print(f"Nombre: {nombre}, Fecha de nacimiento: {nacimiento}, DNI: {dni}, Altura: {altura}")
+
+    conn.close()
+    cursor.close()
+
+    return nuevo_id
+
 
 
 # NO MODIFICAR - INICIO

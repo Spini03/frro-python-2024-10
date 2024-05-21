@@ -2,8 +2,11 @@
 
 import datetime
 
-from practico_04.ejercicio_02 import agregar_persona
-from practico_04.ejercicio_06 import reset_tabla
+import pymysql
+
+from ejercicio_02 import agregar_persona
+from ejercicio_06 import reset_tabla
+from ejercicio_04 import buscar_persona
 
 
 def agregar_peso(id_persona, fecha, peso):
@@ -20,7 +23,34 @@ def agregar_peso(id_persona, fecha, peso):
     - ID del peso registrado.
     - False en caso de no cumplir con alguna validacion."""
 
-    pass # Completar
+    # Completar
+    conn = pymysql.connect( host="localhost", port=3306, user="root", passwd="Git231653*", db="practico4" )
+
+    cursor = conn.cursor()
+
+    resultado = buscar_persona(id_persona)
+    if not resultado:
+        return False
+    
+    cursor.execute("SELECT * FROM PersonaPeso WHERE IdPersona = %s AND Fecha > %s", (id_persona, fecha))
+    if cursor.fetchone():
+        print("Error: Ya existe un registro de fecha posterior para esta persona.")
+        return False
+
+    values = (id_persona, fecha, peso)
+
+    cursor.execute("INSERT INTO PersonaPeso (IdPersona, Fecha, Peso) VALUES (%s, %s, %s)", values)
+
+    conn.commit()
+
+    print(f"Nuevo peso de persona registrado en persona con id {id_persona}")
+
+    print(f"Fecha: {fecha}, Peso: {peso}")
+
+    conn.close()
+    cursor.close()
+
+    return id_persona
 
 
 # NO MODIFICAR - INICIO
