@@ -2,9 +2,13 @@
 
 import datetime
 
-from practico_04.ejercicio_02 import agregar_persona
-from practico_04.ejercicio_06 import reset_tabla
-from practico_04.ejercicio_07 import agregar_peso
+import pymysql
+
+from ejercicio_02 import agregar_persona
+from ejercicio_04 import buscar_persona
+from ejercicio_06 import reset_tabla
+from ejercicio_07 import agregar_peso
+
 
 
 def listar_pesos(id_persona):
@@ -30,7 +34,31 @@ def listar_pesos(id_persona):
 
     - False en caso de no cumplir con alguna validacion.
     """
-    return []
+    
+    if not buscar_persona(id_persona):
+        return False
+    
+   
+    conn = pymysql.connect( host="localhost", port=3306, user="root", passwd="Git231653*", db="practico4" )
+
+   
+    cursor = conn.cursor()
+
+   
+    consulta = "SELECT fecha, peso FROM personaPeso WHERE idPersona = %s"
+    cursor.execute(consulta, (id_persona,))
+
+ 
+    historial_pesos = cursor.fetchall()
+
+    
+    conn.close()
+
+    if historial_pesos:
+        historial_pesos_formateado = [(fecha.strftime("%Y-%m-%d"), peso) for fecha, peso in historial_pesos]
+        return historial_pesos_formateado
+    else:
+        return False
 
 
 # NO MODIFICAR - INICIO
@@ -40,6 +68,7 @@ def pruebas():
     agregar_peso(id_juan, datetime.datetime(2018, 5, 1), 80)
     agregar_peso(id_juan, datetime.datetime(2018, 6, 1), 85)
     pesos_juan = listar_pesos(id_juan)
+    print(pesos_juan)
     pesos_esperados = [
         ('2018-05-01', 80),
         ('2018-06-01', 85),
