@@ -1,6 +1,7 @@
 """Base de Datos SQL - Creación de tablas auxiliares"""
 
-from practico_04.ejercicio_01 import borrar_tabla, crear_tabla
+import pymysql
+from ejercicio_01 import borrar_tabla, crear_tabla
 
 
 def crear_tabla_peso():
@@ -9,13 +10,39 @@ def crear_tabla_peso():
         - Fecha: Date()
         - Peso: Int()
     """
-    pass # Completar
+    # Completar
+    conn = pymysql.connect( host="localhost", port=3306, user="root", passwd="Git231653*", db="practico4" )
+
+    cursor = conn.cursor()
+
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS PersonaPeso (
+            IdPersona INT,
+            Fecha DATETIME,
+            Peso INT,
+            FOREIGN KEY (IdPersona) REFERENCES Persona(IdPersona)
+        );
+    ''')
+
+    conn.commit()
+    conn.close()
+    cursor.close()
 
 
 def borrar_tabla_peso():
     """Implementar la funcion borrar_tabla, que borra la tabla creada 
     anteriormente."""
-    pass # Completar
+    # Completar
+
+    conn = pymysql.connect( host="localhost", port=3306, user="root", passwd="Git231653*", db="practico4" )
+
+    cursor = conn.cursor()
+
+    cursor.execute("DROP TABLE PersonaPeso")
+
+    conn.commit()
+    conn.close()
+    cursor.close()
 
 
 # NO MODIFICAR - INICIO

@@ -17,6 +17,21 @@ class Article:
     # NO MODIFICAR - FIN
 
     # Completar
+    def __str__(self):
+        return self.name
+    
+    def __repr__(self):
+        return f"Article('{self.name}')"
+    
+    def __eq__(self, other):
+        if isinstance(other, Article):
+            return self.name == other.name
+        return False
+    
+    def __lt__(self, other):
+        if isinstance(other, Article):
+            return self.name < other.name
+        return NotImplemented
 
 
 # NO MODIFICAR - INICIO
@@ -50,6 +65,24 @@ class ShoppingCart:
     # NO MODIFICAR - FIN
 
     # Completar
+    def __str__(self):
+        return str([str(article) for article in self.articles])
+    
+    def __repr__(self):
+        articles_repr = ", ".join(repr(article) for article in self.articles)
+        return f"ShoppingCart([{articles_repr}])"
+    
+    def __eq__(self, other):
+        if isinstance(other, ShoppingCart):
+            return sorted(self.articles) == sorted(other.articles)
+        return False
+    
+    def __add__(self, other):
+        if isinstance(other, ShoppingCart):
+            return ShoppingCart(self.articles + other.articles)
+        raise TypeError("Solo se puede sumar ShoppingCart con otro ShoppingCart")
+
+
 
 
 # NO MODIFICAR - INICIO
