@@ -15,5 +15,19 @@ class Socio(Base):
     """
     __tablename__ = 'socios'
 
-    # Completar
+    id_socio = Column(Integer, primary_key=True, autoincrement=True, unique=True)
+    dni = Column(Integer, unique=True, nullable=False)
+    nombre = Column(String(250), nullable=False)
+    apellido = Column(String(250), nullable=False) 
+
+    def __eq__(self, other):
+        if isinstance(other, Socio):
+            return (self.id_socio == other.id_socio and
+                    self.dni == other.dni and
+                    self.nombre == other.nombre and
+                    self.apellido == other.apellido)
+        return False
+
+    def __hash__(self):
+        return hash((self.id_socio, self.dni, self.nombre, self.apellido))
 
