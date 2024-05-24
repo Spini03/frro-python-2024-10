@@ -3,6 +3,8 @@
 from practico_05.ejercicio_01 import Socio
 from practico_05.ejercicio_02 import DatosSocio
 
+# Creación rama practico_06
+
 
 class DniRepetido(Exception):
     pass
