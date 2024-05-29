@@ -45,4 +45,4 @@ while True:
     cv2.imshow("Contornos", contornosimg)
 
 cv2.destroyAllWindows()
-cap.release()
+camara.release()
