@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestión de Socios</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Lista de Socios</h1>
+    <a href="{{ url_for('alta') }}">Alta</a>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>DNI</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for socio in socios %}
+            <tr>
+                <td>{{ socio.id_socio }}</td>
+                <td>{{ socio.dni }}</td>
+                <td>{{ socio.nombre }}</td>
+                <td>{{ socio.apellido }}</td>
+                <td>
+                    <a href="{{ url_for('modificar', id_socio=socio.id_socio) }}">Modificar</a>
+                    <a href="{{ url_for('baja', id_socio=socio.id_socio) }}">Baja</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
