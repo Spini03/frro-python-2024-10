@@ -1,16 +1,47 @@
-<CustomPopup>:
-    title: "Ejemplo de Popup"
-    size_hint: None, None
-    size: 200, 200
+#:import NoTransition kivy.uix.screenmanager.NoTransition
 
-    Button:
-        text: "Cerrar Popup"
-        on_press: root.dismiss()
+ScreenManager:
+    id: screen_manager
+    transition: NoTransition()
+    Screen:
+        name: 'boton'
+        BoxLayout:
+            orientation: 'vertical'
+            size: root.width, root.height
 
-<PopupExample>:
-    Button:
-        text: "Mostrar Popup"
-        size_hint: None, None
-        size: 200, 100
-        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-        on_press: app.show_popup()
+            FloatLayout:
+                Button:
+                    text: "Mostrar Popup"
+                    size_hint: None, None
+                    size: 200, 50
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                    on_release: app.root.current='popup'
+
+    Screen:
+        name: 'popup'
+        BoxLayout:
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+            Popup:
+                title: "Ejemplo de Popup"
+                auto_dismiss: False
+                size_hint: self.width, None
+                size: 200, 200
+                pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+
+                BoxLayout:
+                    orientation: 'vertical'
+                    Label:
+                        text: "Hola!"
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        text_size: self.width, None
+                        halign: 'center'
+                        valign: 'middle'
+                        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                    Button:
+                        text: "Cerrar"
+                        size_hint_y: None
+                        height: '40dp'
+                        on_release: app.root.current='boton'
+                        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+
