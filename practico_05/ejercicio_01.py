@@ -15,5 +15,34 @@ class Socio(Base):
     """
     __tablename__ = 'socios'
 
-    # Completar
+    id = Column("id_socio", Integer(), primary_key=True, autoincrement=True)
+    dni = Column("dni", Integer(), unique=True)
+    nombre = Column("nombre", String(250))
+    apellido = Column("apellido", String(250))
+
+def asignar(self, otro):
+    if isinstance(otro, Socio):
+        atributos = list(self._dict._keys())
+        atributos.remove("_sa_instance_state)
+        for attr in atributos:
+            setattr(self, attr, getattr(otro, attr))
+    else:
+        raise ValueError("Debe ser un objeto de tipo Socio")
+
+def _repr_(self):
+    return f"Socio(dni={self.dni}, nombre={self.nombre}, apellido={self.apellido})"
+
+def _str_(self):
+    return f"Socio nombre:{self.nombre}, apellido:{self.apellido}, dni:{self.dni}, id:{self.id})"
+
+def _eq_(self, otro):
+    if isinstance(otro, Socio):
+        equivale = True
+        atributos = list(self._dict_.keys())
+        atributos.remove('_sa_instance_state')
+        for attr in atributos:
+            equivale = equivale and getattr(self,attr) == getatttr(otro, attr)
+        return equivale
+    else ValueError("Debe ser un objeto de tipo Socio")
+    
 
