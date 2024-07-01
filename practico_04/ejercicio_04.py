@@ -11,7 +11,19 @@ def buscar_persona(id_persona):
     persona basado en su id. El return es una tupla que contiene sus campos: 
     id, nombre, nacimiento, dni y altura. Si no encuentra ningun registro, 
     devuelve False."""
-    pass # Completar
+    conn: sqlite3.Connection = sqlite3.connect("data.db")
+    curs: sqlite3.Cursor = conn.cursor()
+    curs.execute("SELECT * FROM Persona WHERE idPersona = (?)", (id_persona, ))
+    persona:() = curs.fetchone()
+    conn.commit()
+    conn.close()
+    if persona:
+        personaList = list(persona)
+        personaList[2]=datatime.datatime.strptime(persona[2],"%Y-%m-%d %H:%M:%S")
+        persona = tuple(personaList)
+        return persona
+    else:
+        return False
 
 
 # NO MODIFICAR - INICIO
