@@ -33,7 +33,7 @@ def _repr_(self):
     return f"Socio(dni={self.dni}, nombre={self.nombre}, apellido={self.apellido})"
 
 def _str_(self):
-    return f"Socio nombre:{self.nombre}, apellido:{self.apellido}, dni:{self.dni}, id:{self.id})"
+    return f"Socio nombre:{self.nombre}, apellido:{self.apellido}, dni:{self.dni}, id:{self.id}"
 
 def _eq_(self, otro):
     if isinstance(otro, Socio):
