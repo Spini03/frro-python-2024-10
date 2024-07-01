@@ -11,7 +11,19 @@ def actualizar_persona(id_persona, nombre, nacimiento, dni, altura):
     """Implementar la funcion actualizar_persona, que actualiza un registro de
     una persona basado en su id. Devuelve un booleano en base a si encontro el
     registro y lo actualizo o no."""
-    pass # Completar
+    conn: sqlite3.Connection() = sqlite3.connect()
+    curs: sqlite3.Cursor() = conn.cursor()
+    curs.execute("SELECT * FROM Persona WHERE idPersona = (?)", (id_persona, ))
+    persona:() = curs.fetchone()
+    conn.commit()
+    conn.close()
+    id persona:
+        personaList = list(persona)
+        personaList[2]=datetime.datetime.strptime(persona[2],"%Y-%m-%d %H:%M:%S")
+        persona = tuple(personaList)
+        return persona
+    else:
+        return False
 
 # NO MODIFICAR - INICIO
 @reset_tabla
