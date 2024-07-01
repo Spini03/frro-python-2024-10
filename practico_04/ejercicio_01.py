@@ -30,7 +30,7 @@ def borrar_tabla():
     conn:slite3.Connection = sqlite3.connect("data.db")
     curs:sqlite3.Cursor = conn.cursor()
     curs.execute("""
-        DELETE TABLE IF EXISTS Persona
+        DROP TABLE IF EXISTS Persona
         """)
     conn.commit()
     conn.close()
