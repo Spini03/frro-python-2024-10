@@ -12,6 +12,19 @@ class Articulo:
 
     # Completar
 
+    contador_id = 1
+
+    def __init__(self, nombre=None):
+        self.nombre = nombre
+        self.id_ = Articulo.contador_id
+        Articulo._last_id = Articulo.contador_id
+        Articulo.contador_id += 1 
+    
+    @classmethod
+    def mostrar_contador(cls):
+        print("El contador actual de IDs es:", cls.contador_id)
+        
+
 
 # NO MODIFICAR - INICIO
 art1 = Articulo("manzana")
