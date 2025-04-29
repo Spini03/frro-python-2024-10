@@ -3,9 +3,10 @@
 
 Contexto: Se tiene un programa que lee diferentes listas de una tabla en una
 base de datos y se quieren combinar estas listas para que luego puedan crearse
-los objetos de la capa de negocio.
+los objetos de la capa de negocio. Hola
 """
 
+# -*- coding: utf-8 -*-
 
 from typing import Any, List, Tuple
 
@@ -19,7 +20,15 @@ def combinar_basico(nombres: List[str], precios: List[float]) -> Tuple[Any]:
 
     Restricción: Resolver utilizando un bucle for.
     """
-    pass # Completar
+
+    combinado = []
+
+    for i in range(len(nombres)):
+        combinado.append((nombres[i], precios[i]))
+
+    
+    combinado_tupla = tuple(combinado)
+    return combinado_tupla
 
 
 # NO MODIFICAR - INICIO
@@ -43,7 +52,15 @@ def combinar_enumerate(nombres: List[str], precios: List[float], ids: List[int])
     """Re-Escribir utilizando enumerate y agregando un nuevo componente.
     Referencia: https://docs.python.org/3/library/functions.html#enumerate
     """
-    pass # Completar
+    
+    combinado = []
+
+    for i, nombre in enumerate(nombres):
+        combinado.append((nombre, precios[i], ids[i]))
+
+    combinado_tupla = tuple(combinado)
+
+    return combinado_tupla
 
 
 # NO MODIFICAR - INICIO
@@ -67,7 +84,16 @@ def combinar_zip(nombres: List[str], precios: List[float], ids: List[int]) -> Tu
     """Re-Escribir utilizando zip.
     Referencia: https://docs.python.org/3/library/functions.html#zip
     """
-    pass # Completar
+    combinado = []
+
+    for nombre, precio, id_ in zip(nombres, precios, ids):
+        combinado.append((nombre, precio, id_))
+
+
+    combinado_tupla = tuple(combinado)
+
+    return combinado_tupla
+
 
 
 # NO MODIFICAR - INICIO
@@ -93,8 +119,17 @@ def combinar_zip_args(*args) -> Tuple[Any]:
     """Re-Escribir utilizando zip y una cantidad arbitraria de componentes.
     Referencia: https://docs.python.org/3/tutorial/controlflow.html#unpacking-argument-lists
     """
-    pass # Completar
 
+    combinado = []
+
+    for elementos in zip(*args):
+        combinado.append(elementos)
+
+
+    combinado_tupla = tuple(combinado)
+
+    return combinado_tupla
+    
 
 # NO MODIFICAR - INICIO
 respuesta = (
